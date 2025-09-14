@@ -8,51 +8,61 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 210 40% 8%;
+    --background: 240 10% 98%;
+    --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 40% 8%;
+    --card-foreground: 240 10% 3.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 40% 8%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --primary: 210 100% 28%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 100% 35%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 20% 98%;
+    --primary-glow: 262 83% 68%;
+    --primary-dark: 262 83% 48%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 210 40% 12%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 210 25% 45%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 185 100% 42%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 20% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 210 40% 90%;
-    --input: 210 40% 94%;
-    --ring: 210 100% 28%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262 83% 58%;
 
-    --secure: 210 100% 28%;
-    --secure-light: 210 100% 35%;
-    --secure-dark: 210 100% 22%;
+    --secure: 262 83% 58%;
+    --secure-light: 262 83% 68%;
+    --secure-dark: 262 83% 48%;
+    --secure-glow: 262 83% 78%;
     
-    --chat-bubble-sent: 210 100% 28%;
-    --chat-bubble-received: 210 40% 96%;
-    --chat-bubble-sent-text: 0 0% 100%;
-    --chat-bubble-received-text: 210 40% 8%;
+    --chat-bubble-sent: 262 83% 58%;
+    --chat-bubble-received: 220 14.3% 95.9%;
+    --chat-bubble-sent-text: 210 20% 98%;
+    --chat-bubble-received-text: 240 10% 3.9%;
     
-    --gradient-secure: linear-gradient(135deg, hsl(var(--secure)), hsl(var(--secure-light)));
-    --gradient-background: linear-gradient(180deg, hsl(var(--background)), hsl(210 20% 96%));
+    /* Enhanced Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-background: linear-gradient(135deg, hsl(240 10% 98%), hsl(262 20% 96%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(240 10% 99%));
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%), hsl(262 83% 68%), hsl(220 83% 58%));
+    --gradient-secure: linear-gradient(135deg, hsl(var(--secure)), hsl(var(--secure-light)), hsl(var(--secure-glow)));
     
-    --shadow-secure: 0 10px 30px -10px hsl(var(--secure) / 0.3);
-    --shadow-card: 0 4px 20px -4px hsl(210 40% 8% / 0.1);
+    /* Enhanced Shadows */
+    --shadow-glow: 0 0 50px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 4px 32px -4px hsl(240 10% 3.9% / 0.08);
+    --shadow-elevated: 0 20px 64px -12px hsl(240 10% 3.9% / 0.15);
+    --shadow-secure: 0 10px 40px -10px hsl(var(--secure) / 0.3);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.5rem;
 
@@ -74,33 +84,58 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 20% 98%;
+    --primary-glow: 262 83% 68%;
+    --primary-dark: 262 83% 48%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 210 20% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 262 83% 58%;
+
+    --secure: 262 83% 58%;
+    --secure-light: 262 83% 68%;
+    --secure-dark: 262 83% 48%;
+    --secure-glow: 262 83% 78%;
+    
+    --chat-bubble-sent: 262 83% 58%;
+    --chat-bubble-received: 240 3.7% 15.9%;
+    --chat-bubble-sent-text: 210 20% 98%;
+    --chat-bubble-received-text: 0 0% 98%;
+    
+    /* Dark Mode Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-background: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(262 20% 6%));
+    --gradient-card: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 10% 5%));
+    --gradient-hero: linear-gradient(135deg, hsl(262 83% 58%), hsl(262 83% 68%), hsl(220 83% 58%));
+    --gradient-secure: linear-gradient(135deg, hsl(var(--secure)), hsl(var(--secure-light)), hsl(var(--secure-glow)));
+    
+    /* Dark Mode Shadows */
+    --shadow-glow: 0 0 50px hsl(var(--primary) / 0.25);
+    --shadow-card: 0 4px 32px -4px hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 20px 64px -12px hsl(0 0% 0% / 0.5);
+    --shadow-secure: 0 10px 40px -10px hsl(var(--secure) / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
