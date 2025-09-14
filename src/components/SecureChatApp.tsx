@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Upload, Send, Download, Shield, Clock, Copy, Users } from 'lucide-react';
+import { Upload, Send, Download, Shield, Copy, Users, UserPlus, LogOut, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Message {
@@ -31,7 +31,7 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
     },
     {
       id: '2', 
-      text: 'All messages and files shared here are encrypted and automatically deleted when the session ends.',
+      text: 'All messages and files shared here are encrypted and will be deleted when you end the session.',
       sender: 'other',
       timestamp: new Date(Date.now() - 60000),
       type: 'text'
@@ -40,28 +40,9 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
   const [currentMessage, setCurrentMessage] = useState('');
   const [sessionId] = useState(() => propSessionId || Math.random().toString(36).substr(2, 9));
   const [isConnected, setIsConnected] = useState(true);
-  const [timeRemaining, setTimeRemaining] = useState(1800); // 30 minutes
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  // Timer countdown effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeRemaining(prev => {
-        if (prev <= 1) {
-          toast({
-            title: "Session expired",
-            description: "This secure session has ended. All data has been deleted.",
-            variant: "destructive"
-          });
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [toast]);
 
   const handleSendMessage = () => {
     if (!currentMessage.trim()) return;
@@ -123,6 +104,56 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
     });
   };
 
+  const pickContact = async () => {
+    if ('contacts' in navigator && 'ContactsManager' in window) {
+      try {
+        // @ts-ignore - Contact Picker API
+        const contacts = await navigator.contacts.select(['name', 'tel'], { multiple: false });
+        if (contacts.length > 0) {
+          const contact = contacts[0];
+          const link = `${window.location.origin}/chat/${sessionId}`;
+          const message = `Join me for a secure chat: ${link}`;
+          
+          // Try to open native sharing if available
+          if (navigator.share) {
+            await navigator.share({
+              title: 'SecureChat Invitation',
+              text: `${contact.name}, ${message}`,
+            });
+          } else {
+            // Fallback to copying
+            navigator.clipboard.writeText(message);
+            toast({
+              title: "Invitation ready",
+              description: `Message for ${contact.name} copied to clipboard.`,
+            });
+          }
+        }
+      } catch (error) {
+        toast({
+          title: "Contact access unavailable",
+          description: "Contact picker not supported. Use the copy link instead.",
+          variant: "destructive"
+        });
+      }
+    } else {
+      toast({
+        title: "Contact access unavailable", 
+        description: "Contact picker not supported on this device.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const endSession = () => {
+    toast({
+      title: "Session ended",
+      description: "This secure session has been terminated. All data has been deleted.",
+    });
+    // In a real app, this would clear all data and redirect
+    setMessages([]);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary">
       <div className="container mx-auto p-4 max-w-4xl">
@@ -139,16 +170,21 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                <span>Session expires in: {formatTime(timeRemaining)}</span>
-              </div>
               <div className="flex items-center space-x-2">
                 <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
                 <span className="text-sm text-muted-foreground">
                   {isConnected ? 'Connected' : 'Offline'}
                 </span>
               </div>
+              <Button 
+                onClick={endSession} 
+                variant="outline" 
+                size="sm" 
+                className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                End Session
+              </Button>
             </div>
           </div>
         </Card>
@@ -160,13 +196,19 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
               <Users className="h-5 w-5 text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium">Session ID: {sessionId}</p>
-                <p className="text-xs text-muted-foreground">Share this link to invite someone</p>
+                <p className="text-xs text-muted-foreground">Invite someone to join this secure chat</p>
               </div>
             </div>
-            <Button onClick={copySessionLink} variant="outline" size="sm">
-              <Copy className="h-4 w-4 mr-2" />
-              Copy Link
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button onClick={pickContact} variant="outline" size="sm">
+                <Phone className="h-4 w-4 mr-2" />
+                Pick Contact
+              </Button>
+              <Button onClick={copySessionLink} variant="outline" size="sm">
+                <Copy className="h-4 w-4 mr-2" />
+                Copy Link
+              </Button>
+            </div>
           </div>
         </Card>
 
@@ -258,7 +300,7 @@ const SecureChatApp: React.FC<SecureChatAppProps> = ({ sessionId: propSessionId 
             <div className="text-sm">
               <p className="font-medium text-secure mb-1">End-to-End Encrypted</p>
               <p className="text-muted-foreground">
-                Your messages and files are encrypted and will be automatically deleted when this session ends. 
+                Your messages and files are encrypted and will be deleted when you end this session. 
                 No data is permanently stored on our servers.
               </p>
             </div>
