@@ -1,73 +1,104 @@
-# Welcome to your Lovable project
+🔒 SecureChat
 
-## Project info
+A secure, temporary chat and file-sharing web application.
+Users can send text messages, audio, video, images, and documents in real-time.
+All data is automatically deleted once the conversation ends, ensuring privacy and security.
 
-**URL**: https://lovable.dev/projects/aed91419-ff7e-4013-a03c-c5fcbab3dc80
+🚀 Features
 
-## How can I edit this code?
+💬 Real-time chat (text messages)
 
-There are several ways of editing your application.
+📂 File sharing (audio, video, images, docs)
 
-**Use Lovable**
+⏳ Temporary conversations (data deleted when session ends)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/aed91419-ff7e-4013-a03c-c5fcbab3dc80) and start prompting.
+🔑 End-to-end encryption for messages & files
 
-Changes made via Lovable will be committed automatically to this repo.
+🌐 Web-based (no authentication required)
 
-**Use your preferred IDE**
+📱 Access device contacts (via Contact Picker API, if supported)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🖥️ Clean and simple chat interface
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+🛠️ Tech Stack
 
-Follow these steps:
+Frontend: React, TailwindCSS, Socket.IO client
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Backend: Node.js, Express, Socket.IO
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Storage: Ephemeral / in-memory (no permanent DB)
 
-# Step 3: Install the necessary dependencies.
-npm i
+Security: HTTPS + TLS + end-to-end encryption
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+📦 Installation
+1️⃣ Clone the repository
+git clone https://github.com/HimanshuKumar2k4/SecureChat.git
+cd SecureChat
 
-**Edit a file directly in GitHub**
+2️⃣ Install dependencies
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+If the project has separate client and server folders:
 
-**Use GitHub Codespaces**
+# Install frontend dependencies
+cd client
+npm install
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Install backend dependencies
+cd ../server
+npm install
 
-## What technologies are used for this project?
 
-This project is built with:
+If everything is in a single folder with one package.json:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+npm install
 
-## How can I deploy this project?
+▶️ Running the Project
+Start Backend
+cd server
+npm start
 
-Simply open [Lovable](https://lovable.dev/projects/aed91419-ff7e-4013-a03c-c5fcbab3dc80) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+Server will run on http://localhost:5000 (or configured port).
 
-Yes, you can!
+Start Frontend
+cd client
+npm start
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Frontend will run on http://localhost:3000.
+
+📖 Usage
+
+Open the app in your browser: http://localhost:3000
+
+Select a contact (if supported) or share a session link with another user.
+
+Exchange messages and files securely in real time.
+
+Once both users leave the chat → all data is deleted from server & client.
+
+🔐 Security
+
+All communication is encrypted with TLS/HTTPS.
+
+Messages and files are stored only temporarily in memory.
+
+Auto-deletion ensures no logs, no traces after conversation ends.
+
+📌 Future Improvements
+
+Add group chat support
+
+Mobile PWA version
+
+Self-hosted Docker deployment
+
+🤝 Contributing
+
+Pull requests are welcome!
+If you’d like to suggest new features or report bugs, please open an issue
+.
+
+📜 License
+
+This project is licensed under the MIT License.

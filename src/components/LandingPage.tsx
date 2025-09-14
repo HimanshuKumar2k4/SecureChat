@@ -162,7 +162,7 @@ const LandingPage = () => {
                   <div className="text-muted-foreground">Data Stored</div>
                 </div>
                 <div className="text-center">
-                  <div className="font-semibold text-secure">30 min</div>
+                  <div className="font-semibold text-secure">Conversation Time</div>
                   <div className="text-muted-foreground">Max Session</div>
                 </div>
               </div>
